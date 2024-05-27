@@ -1,0 +1,46 @@
+@startuml
+'https://plantuml.com/class-diagram
+
+class MathematicalElement {
+    - ElementType : OperatorType
+    + getType() : ElementType
+}
+
+interface ElementType
+
+enum OperatorType implements ElementType{
+    PLUS,
+    MINUS,
+    TIMES,
+    DIVIDE,
+    POWER,
+    ROOT,
+    MODULE
+}
+
+interface Checker
+
+class ElementToChecker {
+    + getChecker(element: MathematicalElement): Checker
+}
+
+
+enum OperandType implements ElementType {
+    CONSTANT
+    VARIABLE
+}
+
+class Function {
+    - List<MathematicalElement>
+    - elementToChecker: ElementToChecker
+    + evaluateFunction() : Operand
+    + getVariables() : Operand
+}
+
+ElementToChecker *-- MathematicalElement
+ElementToChecker *-- Checker
+MathematicalElement *-- ElementType
+Function *-- MathematicalElement
+Function *-- ElementToChecker
+
+@enduml
