@@ -1,46 +1,73 @@
 @startuml
 'https://plantuml.com/class-diagram
 
-class MathematicalElement {
-    - ElementType : OperatorType
-    + getType() : ElementType
+interface Function {
+    + apply(): Double
+    + toString(): String
+    + listVariables(): List<String>
 }
 
-interface ElementType
-
-enum OperatorType implements ElementType{
-    PLUS,
-    MINUS,
-    TIMES,
-    DIVIDE,
-    POWER,
-    ROOT,
-    MODULE
+class Number implements Function {
+    - value: Double
+    + apply(): Double
+    + toString(): String
+    + listVariables(): List<String>
 }
 
-interface Checker
-
-class ElementToChecker {
-    + getChecker(element: MathematicalElement): Checker
+class Variable implements Function {
+    - name: String
+    + apply(): Double
+    + toString(): String
+    + listVariables(): List<String>
 }
 
-
-enum OperandType implements ElementType {
-    CONSTANT
-    VARIABLE
+class Divide implements Function {
+    - listVariables(x: List<String>, y: List<String>): List<String>
+    + apply(): Double
+    + toString(): String
+    + listVariables(): List<String>
 }
 
-class Function {
-    - List<MathematicalElement>
-    - elementToChecker: ElementToChecker
-    + evaluateFunction() : Operand
-    + getVariables() : Operand
+class Minus implements Function {
+    - listVariables(x: List<String>, y: List<String>): List<String>
+    + apply(): Double
+    + toString(): String
+    + listVariables(): List<String>
 }
 
-ElementToChecker *-- MathematicalElement
-ElementToChecker *-- Checker
-MathematicalElement *-- ElementType
-Function *-- MathematicalElement
-Function *-- ElementToChecker
+class Multiply implements Function {
+    - listVariables(x: List<String>, y: List<String>): List<String>
+    + apply(): Double
+    + toString(): String
+    + listVariables(): List<String>
+}
+
+class Sum implements Function {
+    - listVariables(x: List<String>, y: List<String>): List<String>
+    + apply(): Double
+    + toString(): String
+    + listVariables(): List<String>
+}
+
+class Power implements Function {
+    - listVariables(x: List<String>, y: List<String>): List<String>
+    + apply(): Double
+    + toString(): String
+    + listVariables(): List<String>
+}
+
+class Root implements Function {
+    - listVariables(x: List<String>): List<String>
+    + apply(): Double
+    + toString(): String
+    + listVariables(): List<String>
+}
+
+class Module implements Function {
+    - listVariables(x: List<String>): List<String>
+    + apply(): Double
+    + toString(): String
+    + listVariables(): List<String>
+}
 
 @enduml
